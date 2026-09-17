@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Paloma Jácome — Diseño industrial &amp; gestión de proyectos</title>
+<meta name="description" content="Portafolio de Ana Paloma Jácome, diseñadora industrial y project manager en Querétaro, México. Diseño de producto, arquitectura de interiores, UX/UI y gestión de proyectos internacionales.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F0EA;
+    --paper2:#E8E5DC;
+    --ink:#111110;
+    --ink-soft:#68655D;
+    --accent:#2A2AE0;
+    --line:#D9D5C8;
+    --white:#FBFAF7;
+    --sans:'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono:'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  ::selection{background:var(--accent); color:var(--white);}
+  a{color:inherit;}
+  img{display:block; max-width:100%; height:auto;}
+  .wrap{max-width:1220px; margin:0 auto; padding:0 32px;}
+
+  .logo-mark{
+    background-image:url("assets/logo.png");
+    background-size:contain; background-repeat:no-repeat; background-position:center;
+    display:block;
+  }
+
+  /* ---------- grain canvas ---------- */
+  #grain{
+    position:fixed; inset:0; width:100vw; height:100vh;
+    z-index:1; pointer-events:none; mix-blend-mode:multiply; opacity:0.85;
+  }
+
+  /* everything else above the grain layer */
+  .topbar, main, footer{position:relative; z-index:2;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(241,240,234,0.82);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:1220px; margin:0 auto; padding:0 32px;
+    height:60px; display:flex; align-items:center; justify-content:space-between;
+    gap:24px;
+  }
+  .brand{display:flex; align-items:center; gap:9px; text-decoration:none;}
+  .brand-mark{width:18px; height:22px; flex:none; object-fit:contain;}
+  .brand-name{font-family:var(--mono); font-size:13px; font-weight:600; letter-spacing:-0.01em;}
+  nav.mainnav{display:flex; gap:26px;}
+  nav.mainnav a{
+    font-family:var(--mono); font-size:13px; text-decoration:none; color:var(--ink-soft);
+    border-bottom:1px solid transparent; padding-bottom:3px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.mainnav a:hover{color:var(--ink); border-color:var(--accent);}
+  .sheet-indicator{
+    font-family:var(--mono); font-size:12px; color:var(--ink-soft); white-space:nowrap; display:none;
+  }
+  @media(min-width:860px){ .sheet-indicator{display:block;} }
+
+  .navlinks-mobile-toggle{
+    display:none;
+  }
+  @media(max-width:859px){
+    nav.mainnav{
+      position:fixed; top:60px; left:0; right:0; height:calc(100vh - 60px); overflow-y:auto;
+      background:var(--paper); flex-direction:column; gap:0;
+      padding:8px 32px 32px; transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease; z-index:5;
+    }
+    nav.mainnav.open{opacity:1; pointer-events:auto; transform:translateY(0);}
+    nav.mainnav a{padding:14px 0; border-bottom:1px solid var(--line); font-size:15px;}
+    .navlinks-mobile-toggle{
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+      width:34px; height:34px; background:none; border:1px solid var(--line); cursor:pointer; padding:0;
+    }
+    .navlinks-mobile-toggle span{display:block; width:15px; height:1px; background:var(--ink);}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+    padding:120px 0 40px; border-bottom:1px solid var(--line); position:relative;
+  }
+  .hero-tag{
+    position:absolute; top:120px; right:32px; font-family:var(--mono); font-size:12px; color:var(--ink-soft);
+  }
+  @media(max-width:600px){ .hero-tag{display:none;} }
+  .hero-inner{max-width:1220px; margin:0 auto; padding:0 32px; width:100%;}
+  .hero-kicker{
+    font-family:var(--mono); font-size:13px; color:var(--ink-soft); margin:0 0 22px;
+    display:flex; gap:10px; align-items:center;
+  }
+  .hero-kicker .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); display:inline-block;}
+  h1.hero-title{
+    font-family:var(--sans); font-weight:900; letter-spacing:-0.03em;
+    font-size:clamp(2.8rem, 9vw, 7.2rem); line-height:0.94; margin:0 0 30px;
+    filter:blur(16px); opacity:0;
+    animation:blurIn 1.15s cubic-bezier(.2,.7,.3,1) forwards;
+    animation-delay:.1s;
+  }
+  @keyframes blurIn{ to{ filter:blur(0); opacity:1; } }
+  @media (prefers-reduced-motion: reduce){
+    h1.hero-title{animation:none; filter:none; opacity:1;}
+  }
+  .hero-title em{font-style:normal; color:var(--accent);}
+  .hero-lead{
+    font-size:clamp(16px,2vw,19px); max-width:56ch; color:var(--ink); margin:0 0 42px;
+  }
+  .hero-tagrow{
+    display:flex; flex-wrap:wrap; gap:8px 28px; border-top:1px solid var(--line); padding-top:20px;
+  }
+  .hero-tagrow span{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);}
+
+  /* ---------- Info block (CV style) ---------- */
+  section{padding:80px 0; border-bottom:1px solid var(--line); position:relative;}
+  section.alt{background:var(--paper2);}
+
+  .info-grid{display:grid; grid-template-columns:0.85fr 1fr 1fr; gap:56px;}
+  @media(max-width:900px){ .info-grid{grid-template-columns:1fr; gap:48px;} }
+
+  .info-col label{
+    display:block; font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);
+    margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--ink);
+  }
+  .id-block{display:flex; flex-direction:column; gap:22px;}
+  .id-contact{font-family:var(--mono); font-size:13px; line-height:1.9; color:var(--ink);}
+  .id-contact a{text-decoration:none;}
+  .id-contact a:hover{color:var(--accent);}
+  .id-wordmark{display:flex; align-items:flex-start; gap:10px;}
+  .id-wordmark img{width:30px; margin-top:4px;}
+  .id-wordmark-text .name{font-family:var(--sans); font-weight:800; font-size:26px; letter-spacing:-0.02em; line-height:1;}
+  .id-wordmark-text .role{font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-top:4px;}
+  .id-photo{border:1px solid var(--line); background:var(--white); padding:6px;}
+  .id-photo img{width:100%; aspect-ratio:3/4; object-fit:cover;}
+  .id-bio{font-size:14.5px; color:var(--ink-soft); max-width:42ch;}
+
+  .cv-entry{margin-bottom:22px;}
+  .cv-entry:last-child{margin-bottom:0;}
+  .cv-role{font-weight:700; font-size:15px;}
+  .cv-company{font-family:var(--mono); font-size:13px; color:var(--accent); margin-top:2px;}
+  .cv-date{font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .cv-desc{font-size:13.5px; color:var(--ink-soft); margin-top:8px; line-height:1.55;}
+
+  .skill-list{font-family:var(--mono); font-size:13.5px; line-height:2.05; color:var(--ink);}
+  .skill-list .fade{color:var(--ink-soft);}
+
+  /* ---------- What I do (mood section) ---------- */
+  .whatido-head{max-width:64ch;}
+  h2.big{
+    font-family:var(--sans); font-weight:800; letter-spacing:-0.025em;
+    font-size:clamp(2.2rem, 6vw, 4.4rem); line-height:1.02; margin:0 0 24px;
+  }
+  .whatido-head p{font-size:16.5px; color:var(--ink-soft); max-width:60ch; margin:0;}
+  .pill-cloud{display:flex; flex-wrap:wrap; gap:14px; margin-top:56px;}
+  .pill{
+    font-family:var(--mono); font-size:13.5px; padding:10px 20px; border:1px solid var(--ink);
+    border-radius:999px; white-space:nowrap; transition:background .15s ease, color .15s ease;
+  }
+  .pill:hover{background:var(--ink); color:var(--paper);}
+  .pill.accent{border-color:var(--accent); color:var(--accent);}
+  .pill.accent:hover{background:var(--accent); color:var(--white);}
+
+  /* ---------- Projects ---------- */
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:44px; flex-wrap:wrap;
+  }
+  .section-label{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); margin:0 0 10px;}
+  h2.section-title{
+    font-family:var(--sans); font-weight:800; letter-spacing:-0.02em;
+    font-size:clamp(1.8rem, 4vw, 2.6rem); margin:0;
+  }
+  .section-meta{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); max-width:34ch; text-align:right;}
+  @media(max-width:640px){ .section-meta{text-align:left;} }
+
+  .plates{display:flex; flex-direction:column; gap:1px; background:var(--line); margin-top:56px;}
+  .plate{background:var(--paper); display:grid; grid-template-columns:1fr 1fr; scroll-margin-top:76px;}
+  .plate.alt-order .plate-media{order:2;}
+  .plate.wide{grid-template-columns:1fr;}
+  .plate-media{overflow:hidden; background:var(--ink); min-height:260px;}
+  .plate-media img{width:100%; height:100%; object-fit:cover; min-height:260px;}
+  .plate.wide .plate-media img{min-height:0; object-fit:contain; background:#eeece4;}
+  .plate-body{padding:44px 48px; display:flex; flex-direction:column; justify-content:center; gap:14px;}
+  .plate-tag{font-family:var(--mono); font-size:12px; color:var(--accent);}
+  .plate-body h3{
+    font-family:var(--sans); font-weight:800; letter-spacing:-0.02em;
+    font-size:clamp(1.4rem,2.4vw,1.9rem); margin:0;
+  }
+  .plate-body p{color:var(--ink-soft); font-size:14.5px; margin:0; max-width:46ch;}
+  .plate-specs{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-top:6px;}
+  .plate-specs b{color:var(--ink); font-weight:600;}
+  .plate.text-only{grid-template-columns:1fr 1fr;}
+  .plate-glyph{display:flex; align-items:center; justify-content:center; background:var(--ink); padding:40px;}
+  .plate-status{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-soft); margin-top:4px;
+  }
+  .plate-status .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); display:inline-block;}
+
+  @media(max-width:760px){
+    .plate, .plate.alt-order, .plate.text-only{grid-template-columns:1fr;}
+    .plate.alt-order .plate-media{order:0;}
+    .plate-body{padding:32px 24px;}
+  }
+
+  /* ---------- Floating project cards ---------- */
+  .project-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+    margin-bottom:56px;
+  }
+  .project-card{
+    display:block; text-decoration:none; color:var(--ink);
+    background:var(--paper); border:1px solid var(--ink);
+    padding:26px 22px; cursor:pointer;
+    animation:floatCard 5s ease-in-out infinite;
+    transition:background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+    will-change:transform;
+  }
+  .project-card:hover{
+    background:var(--ink); color:var(--paper);
+    transform:translateY(-6px);
+    box-shadow:0 14px 24px -12px rgba(0,0,0,0.28);
+  }
+  .project-card:hover .project-card-tag{color:var(--paper); opacity:0.7;}
+  .project-card-tag{
+    display:block; font-family:var(--mono); font-size:11.5px; color:var(--accent);
+    margin-bottom:10px;
+  }
+  .project-card-name{
+    display:block; font-family:var(--sans); font-weight:800; letter-spacing:-0.01em;
+    font-size:17px; line-height:1.25;
+  }
+  .project-card:nth-child(1){animation-delay:0s;}
+  .project-card:nth-child(2){animation-delay:.6s;}
+  .project-card:nth-child(3){animation-delay:1.2s;}
+  .project-card:nth-child(4){animation-delay:1.8s;}
+  .project-card:nth-child(5){animation-delay:.3s;}
+  .project-card:nth-child(6){animation-delay:.9s;}
+  .project-card:nth-child(7){animation-delay:1.5s;}
+  @keyframes floatCard{
+    0%, 100%{transform:translateY(0);}
+    50%{transform:translateY(-7px);}
+  }
+  @media(max-width:760px){
+    .project-grid{grid-template-columns:1fr 1fr; gap:12px;}
+  }
+  @media(max-width:480px){
+    .project-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .project-card{animation:none;}
+    .project-card:hover{transform:none;}
+  }
+
+  /* ---------- Education ---------- */
+  .edu-list{display:flex; flex-direction:column;}
+  .edu-item{
+    display:grid; grid-template-columns:140px 1fr; gap:24px; padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .edu-item:first-child{border-top:1px solid var(--ink);}
+  .edu-item .edu-date{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);}
+  .edu-item .edu-title{font-weight:700; font-size:15px;}
+  .edu-item .edu-sub{color:var(--ink-soft); font-size:13.5px; margin-top:3px; font-family:var(--mono);}
+  @media(max-width:600px){ .edu-item{grid-template-columns:1fr; gap:6px;} }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:64px; align-items:start;}
+  @media(max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-list{list-style:none; margin:32px 0 0; padding:0; font-family:var(--mono);}
+  .contact-list li{padding:16px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; font-size:13.5px;}
+  .contact-list a{text-decoration:none; font-weight:600;}
+  .contact-list a:hover{color:var(--accent);}
+  .contact-list span.label{color:var(--ink-soft);}
+  .contact-figure{border:1px solid var(--line); background:var(--white); padding:8px;}
+  .contact-figure img{width:100%; aspect-ratio:1/1; object-fit:cover; object-position:center 15%;}
+  @media(max-width:860px){ .contact-figure{order:-1; max-width:360px;} }
+
+  footer.site-footer{padding:32px 0; font-family:var(--mono); font-size:12px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;} }
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13.5px;
+    padding:13px 22px; text-decoration:none; border:1px solid var(--ink); color:var(--ink); background:transparent;
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper);}
+  .btn.primary{background:var(--accent); color:var(--white); border-color:var(--accent);}
+  .btn.primary:hover{background:#1f1fc4; border-color:#1f1fc4;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;}
+
+  .dropdown-wrap{position:relative;}
+  .dropdown-menu{
+    position:absolute; top:calc(100% + 8px); left:0; min-width:240px; z-index:20;
+    background:var(--paper); border:1px solid var(--ink); padding:6px;
+    display:flex; flex-direction:column; gap:2px;
+    opacity:0; transform:translateY(-6px); pointer-events:none;
+    transition:opacity .15s ease, transform .15s ease;
+  }
+  .dropdown-menu.open{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .dropdown-menu a{
+    font-family:var(--mono); font-size:13px; text-decoration:none; color:var(--ink);
+    padding:10px 12px; border-radius:2px;
+  }
+  .dropdown-menu a:hover{background:var(--ink); color:var(--paper);}
+  .dropdown-menu a.all{color:var(--ink-soft); border-top:1px solid var(--line); margin-top:4px; padding-top:12px;}
+  .dropdown-menu a.all:hover{color:var(--paper);}
+</style>
+</head>
+<body>
+
+<canvas id="grain" aria-hidden="true"></canvas>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark logo-mark" aria-hidden="true"></span>
+      <span class="brand-name">ana jácome</span>
+    </a>
+    <nav class="mainnav" id="mainnav">
+      <a href="#perfil">perfil</a>
+      <a href="#quehago">qué hago</a>
+      <a href="#proyectos">proyectos</a>
+      <a href="#educacion">educación</a>
+      <a href="#contacto">contacto</a>
+    </nav>
+    <span class="sheet-indicator" id="sheetIndicator">00 — inicio</span>
+    <button class="navlinks-mobile-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <span class="hero-tag">paloma.mx</span>
+    <div class="hero-inner">
+      <p class="hero-kicker"><span class="dot"></span>Querétaro, México — disponible para reubicación</p>
+      <h1 class="hero-title">Diseño que <em>funciona.</em><br>Proyectos que avanzan.</h1>
+      <p class="hero-lead">Soy diseñadora industrial y project manager. Casi 4 años entre estudios de diseño, manufactura y operaciones de cuentas internacionales — hoy en SGS &amp; Co, antes en Pottery Barn · Williams-Sonoma.</p>
+      <div class="cta-row">
+        <div class="dropdown-wrap">
+          <button type="button" class="btn primary" id="verProyectosBtn" aria-haspopup="true" aria-expanded="false">ver proyectos</button>
+          <div class="dropdown-menu" id="verProyectosMenu">
+            <a href="#proyecto-mabe">Mabe — estufa</a>
+            <a href="#proyecto-ge">General Electric — spacer</a>
+            <a href="#proyecto-vallaheim">Vallaheim — interiores</a>
+            <a href="#proyecto-wasabi">Wasabi — ux/ui</a>
+            <a href="#proyectos" class="all">ver todos los proyectos</a>
+          </div>
+        </div>
+        <a href="https://wa.me/524428217101?text=Hola%20Ana%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20platicar%20sobre%20una%20oportunidad." class="btn" target="_blank" rel="noopener">contactarme</a>
+      </div>
+      <div class="hero-tagrow">
+        <span>diseño ux</span>
+        <span>project management</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFIL (CV style) -->
+  <section id="perfil">
+    <div class="wrap info-grid">
+      <div class="info-col reveal">
+        <label>perfil</label>
+        <div class="id-block">
+          <div class="id-wordmark">
+            <span class="logo-mark" style="width:30px;height:36px;margin-top:4px;flex:none;" aria-hidden="true"></span>
+            <div class="id-wordmark-text">
+              <div class="name">Ana Paloma</div>
+              <div class="role">diseñadora industrial · pm</div>
+            </div>
+          </div>
+          <p class="id-bio">Trabajo entre lo creativo y lo operativo: dibujo piezas a escala y coordino equipos y cuentas internacionales con el mismo cuidado.</p>
+          <div class="id-contact">
+            anapjacome00@gmail.com<br>
+            <a href="tel:+524428217101">+52 442 821 7101</a><br>
+            <a href="https://www.linkedin.com/in/anapalomajacome0000/" target="_blank" rel="noopener">linkedin.com/in/anapalomajacome0000</a><br>
+            Querétaro, México
+          </div>
+        </div>
+      </div>
+
+      <div class="info-col reveal">
+        <label>experiencia</label>
+        <div class="cv-entry">
+          <div class="cv-role">Project Manager</div>
+          <div class="cv-company">SGS &amp; Co. — St. Louis (remoto)</div>
+          <div class="cv-date">2025 — presente</div>
+          <p class="cv-desc">Lidero y guío equipos internacionales de preprensa y control de calidad; coordino diseño de marca para clientes como Coca-Cola, Monster y Smirnoff; doy seguimiento a tracking, reporting y facturación con dashboards en SQL; impulso mejoras de proceso que reducen costos operativos.</p>
+        </div>
+        <div class="cv-entry">
+          <div class="cv-role">Digital Strategist / Marketing</div>
+          <div class="cv-company">IENTC Telecommunications</div>
+          <div class="cv-date">2025</div>
+          <p class="cv-desc">Se planearon, lanzaron y optimizaron campañas digitales, incluyendo paid media; se gestionaron y probaron presupuestos de campaña; se analizaron datos de mercado, audiencia y desempeño.</p>
+        </div>
+        <div class="cv-entry">
+          <div class="cv-role">Project Manager</div>
+          <div class="cv-company">Pottery Barn · Williams-Sonoma Inc.</div>
+          <div class="cv-date">2024 — 2025</div>
+          <p class="cv-desc">Se coordinaron proyectos para clientes residenciales en EE. UU.; se colaboró con equipos multidisciplinarios; se analizaron KPIs y feedback de cliente; se apoyó la plataforma Trade Alliance.</p>
+        </div>
+      </div>
+
+      <div class="info-col reveal">
+        <label>herramientas</label>
+        <div class="skill-list">
+          mySGS &amp; SAP<br>
+          Excel &amp; SQL dashboards<br>
+          Project Planner<br>
+          SketchUp &amp; D5 Render<br>
+          Figma — UX/UI<br>
+          Adobe Creative Suite<br>
+          Modelado 1:1 &amp; prototipado<br>
+          Python <span class="fade">— en formación</span>
+        </div>
+        <br>
+        <label>idiomas</label>
+        <div class="skill-list">
+          Español <span class="fade">— nativo</span><br>
+          Inglés <span class="fade">— IELTS C1</span><br>
+          Francés <span class="fade">— DELF B1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ HAGO -->
+  <section class="alt" id="quehago">
+    <div class="wrap">
+      <div class="whatido-head reveal">
+        <p class="section-label">qué hago (y disfruto haciendo)</p>
+        <h2 class="big">Construyo sistemas<br>que se sostienen solos.</h2>
+        <p>Diseño piezas, espacios y marcas — y también los proyectos y equipos que los hacen posibles. Me interesa lo que conecta lo creativo con lo operativo: prototipos, dashboards, procesos y presentaciones que de verdad se usan.</p>
+      </div>
+      <div class="pill-cloud reveal">
+        <span class="pill">Diseño industrial</span>
+        <span class="pill">Prototipado 1:1</span>
+        <span class="pill accent">Project management</span>
+        <span class="pill">Arquitectura de interiores</span>
+        <span class="pill">Identidad de marca</span>
+        <span class="pill">UX / UI</span>
+        <span class="pill accent">Dashboards &amp; KPIs</span>
+        <span class="pill">Investigación de usuario</span>
+        <span class="pill">Render &amp; visualización</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="section-label">02 — proyectos</p>
+          <h2 class="section-title">Trabajo seleccionado</h2>
+        </div>
+        <p class="section-meta">Selecciona un proyecto para ver el caso completo.</p>
+      </div>
+      <div class="project-grid reveal">
+        <a href="#proyecto-mabe" class="project-card">
+          <span class="project-card-tag">diseño industrial</span>
+          <span class="project-card-name">Mabe — Rediseño de estufa</span>
+        </a>
+        <a href="#proyecto-prepec" class="project-card">
+          <span class="project-card-tag">diseño industrial · exhibición</span>
+          <span class="project-card-name">Prepec — Stand corporativo</span>
+        </a>
+        <a href="#proyecto-ge" class="project-card">
+          <span class="project-card-tag">diseño industrial · ingeniería</span>
+          <span class="project-card-name">General Electric — Spacer</span>
+        </a>
+        <a href="#proyecto-vallaheim" class="project-card">
+          <span class="project-card-tag">arquitectura de interiores</span>
+          <span class="project-card-name">Vallaheim — Texas, USA</span>
+        </a>
+        <a href="#proyecto-wasabi" class="project-card">
+          <span class="project-card-tag">ux / ui</span>
+          <span class="project-card-name">Agoda &amp; Wasabi — Usabilidad</span>
+        </a>
+        <a href="#proyecto-potterybarn" class="project-card">
+          <span class="project-card-tag">arquitectura de interiores</span>
+          <span class="project-card-name">Pottery Barn — Manual IA</span>
+        </a>
+        <a href="#proyecto-palomamx" class="project-card">
+          <span class="project-card-tag">identidad de marca</span>
+          <span class="project-card-name">Paloma.mx &amp; Rumberos</span>
+        </a>
+      </div>
+
+      <div class="plates" id="plates-projects">
+
+        <div class="plate text-only" id="proyecto-mabe">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8" cy="9" r="2"/><circle cx="16" cy="9" r="2"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">diseño industrial</span>
+            <h3>Mabe — Rediseño de estufa</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-prepec">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">diseño industrial · exhibición</span>
+            <h3>Prepec — Stand corporativo</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-ge">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.2 7.8l2.1 1.7M17.7 14.5l2.1 1.7M4.2 16.2l2.1-1.7M17.7 9.5l2.1-1.7"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">diseño industrial · ingeniería</span>
+            <h3>General Electric — Spacer</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-vallaheim">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">arquitectura de interiores</span>
+            <h3>Vallaheim — Texas, USA</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-wasabi">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 8h18"/><circle cx="6" cy="6" r="0.6" fill="var(--paper)"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">ux / ui</span>
+            <h3>Agoda &amp; Wasabi — Usabilidad</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-potterybarn">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">arquitectura de interiores</span>
+            <h3>Pottery Barn — Manual IA</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+        <div class="plate text-only" id="proyecto-palomamx">
+          <div class="plate-glyph" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+          </div>
+          <div class="plate-body">
+            <span class="plate-tag">identidad de marca</span>
+            <h3>Paloma.mx &amp; Rumberos</h3>
+            <p>Caso de estudio completo en preparación.</p>
+            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section class="alt" id="educacion">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="section-label">03 — educación</p>
+          <h2 class="section-title">Educación &amp; certificaciones</h2>
+        </div>
+      </div>
+      <div class="edu-list reveal">
+        <div class="edu-item">
+          <div class="edu-date">2025 — 2026</div>
+          <div><div class="edu-title">Posgrado en Data Science &amp; AI</div><div class="edu-sub">Universidad Anáhuac — en curso</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-date">2019 — 2024</div>
+          <div><div class="edu-title">Licenciatura en Diseño Industrial</div><div class="edu-sub">Universidad Anáhuac — graduada con excelencia académica</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-date">2024</div>
+          <div><div class="edu-title">Curso de verano en UX Design</div><div class="edu-sub">NABA, Milán</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-date">2023 — 2025</div>
+          <div><div class="edu-title">Certificaciones</div><div class="edu-sub">Google UX Design Certificate (2023) · Digital Marketing Network through AI (2025)</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <p class="section-label">04 — contacto</p>
+        <h2 class="big">Hablemos de tu<br>próximo proyecto.</h2>
+        <p style="max-width:46ch; color:var(--ink-soft); font-size:15.5px; margin-top:18px;">Abierta a roles de project management, diseño industrial o proyectos freelance de marca e interiores.</p>
+        <ul class="contact-list">
+          <li><span class="label">correo</span><a href="mailto:anapjacome00@gmail.com">anapjacome00@gmail.com</a></li>
+          <li><span class="label">whatsapp</span><a href="https://wa.me/524428217101?text=Hola%20Ana%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20platicar%20sobre%20una%20oportunidad." target="_blank" rel="noopener">+52 442 821 7101</a></li>
+          <li><span class="label">linkedin</span><a href="https://www.linkedin.com/in/anapalomajacome0000/" target="_blank" rel="noopener">linkedin.com/in/anapalomajacome0000</a></li>
+          <li><span class="label">ubicación</span><span>Querétaro, México</span></li>
+        </ul>
+      </div>
+      <div class="contact-figure reveal">
+        <!-- TODO(Ana): replace with the real photo — see assets/README.md -->
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23E8E5DC'/%3E%3Ctext x='50%25' y='50%25' font-family='monospace' font-size='14' fill='%2368655D' text-anchor='middle' dominant-baseline='middle'%3Efoto pendiente%3C/text%3E%3C/svg%3E" alt="Ana Paloma trabajando en su laptop">
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer wrap">
+    <span>© 2026 Ana Paloma Jácome. Todos los derechos reservados.</span>
+    <span>diseño industrial &amp; project management — querétaro, mx</span>
+  </footer>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainnav');
+  if(toggle){
+    toggle.addEventListener('click', function(){
+      var isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // "ver proyectos" dropdown
+  (function(){
+    var btn = document.getElementById('verProyectosBtn');
+    var menu = document.getElementById('verProyectosMenu');
+    if(!btn || !menu) return;
+    function close(){ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    function toggleMenu(e){
+      e.stopPropagation();
+      var isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    btn.addEventListener('click', toggleMenu);
+    document.addEventListener('click', function(e){
+      if(!menu.contains(e.target) && e.target !== btn) close();
+    });
+    menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  })();
+
+  // Sheet indicator scroll-spy
+  var sheets = [
+    {id:'inicio', label:'00 — inicio'},
+    {id:'perfil', label:'01 — perfil'},
+    {id:'quehago', label:'01b — qué hago'},
+    {id:'proyectos', label:'02 — proyectos'},
+    {id:'educacion', label:'03 — educación'},
+    {id:'contacto', label:'04 — contacto'}
+  ];
+  var indicator = document.getElementById('sheetIndicator');
+  var sections = sheets.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+  if('IntersectionObserver' in window && indicator){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var match = sheets.find(function(s){ return s.id === entry.target.id; });
+          if(match) indicator.textContent = match.label;
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  // Reveal on scroll
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); ro.unobserve(entry.target); }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ ro.observe(el); });
+  } else { revealEls.forEach(function(el){ el.classList.add('in'); }); }
+
+  // ---------- Interactive dot-grid background ----------
+  (function(){
+    var canvas = document.getElementById('grain');
+    var ctx = canvas.getContext('2d', {alpha:true});
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W, H, DPR;
+    var mouse = {tx:-9999, ty:-9999, x:-9999, y:-9999, active:false};
+    var GRID = 26;     // spacing between dots
+    var DOT_R = 1.15;  // resting dot radius
+    var MAX_R = 3.6;   // expanded dot radius directly under the cursor
+    var RADIUS = 210;  // interaction radius
+    var BASE_ALPHA = 0.08;
+    var MAX_ALPHA = 0.24;
+
+    var baseCanvas = document.createElement('canvas');
+    var baseCtx = baseCanvas.getContext('2d');
+
+    function resize(){
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W*DPR; canvas.height = H*DPR;
+      canvas.style.width = W+'px'; canvas.style.height = H+'px';
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+
+      baseCanvas.width = W*DPR; baseCanvas.height = H*DPR;
+      baseCtx.setTransform(DPR,0,0,DPR,0,0);
+      drawBase();
+    }
+
+    function drawBase(){
+      baseCtx.clearRect(0,0,W,H);
+      baseCtx.fillStyle = 'rgba(17,17,16,'+BASE_ALPHA+')';
+      for(var y=GRID/2; y<H+GRID; y+=GRID){
+        for(var x=GRID/2; x<W+GRID; x+=GRID){
+          baseCtx.beginPath();
+          baseCtx.arc(x,y,DOT_R,0,Math.PI*2);
+          baseCtx.fill();
+        }
+      }
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('mousemove', function(e){
+      mouse.tx = e.clientX; mouse.ty = e.clientY; mouse.active = true;
+    }, {passive:true});
+    window.addEventListener('mouseleave', function(){ mouse.active = false; });
+    window.addEventListener('touchmove', function(e){
+      if(e.touches && e.touches[0]){
+        mouse.tx = e.touches[0].clientX; mouse.ty = e.touches[0].clientY; mouse.active = true;
+      }
+    }, {passive:true});
+    window.addEventListener('touchend', function(){ mouse.active = false; });
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ctx.drawImage(baseCanvas, 0, 0, W, H);
+
+      if(mouse.active){
+        // smooth, fluid follow instead of snapping straight to the cursor
+        if(mouse.x < 0){ mouse.x = mouse.tx; mouse.y = mouse.ty; }
+        mouse.x += (mouse.tx - mouse.x) * 0.12;
+        mouse.y += (mouse.ty - mouse.y) * 0.12;
+
+        var now = performance.now();
+        var minCol = Math.max(0, Math.floor((mouse.x - RADIUS) / GRID) - 1);
+        var maxCol = Math.floor((mouse.x + RADIUS) / GRID) + 1;
+        var minRow = Math.max(0, Math.floor((mouse.y - RADIUS) / GRID) - 1);
+        var maxRow = Math.floor((mouse.y + RADIUS) / GRID) + 1;
+
+        for(var row=minRow; row<=maxRow; row++){
+          var cy = row*GRID + GRID/2;
+          for(var col=minCol; col<=maxCol; col++){
+            var cx = col*GRID + GRID/2;
+            var dx = cx - mouse.x, dy = cy - mouse.y;
+            var dist = Math.sqrt(dx*dx + dy*dy);
+            if(dist > RADIUS) continue;
+            var t = 1 - dist/RADIUS;
+            t = t*t*(3 - 2*t); // smoothstep easing
+
+            // gentle continuous ripple flowing outward — smoother than per-dot flicker
+            var ripple = 0.62 + 0.38*Math.sin(dist/30 - now/420);
+            var tt = t * ripple;
+
+            var r = DOT_R + (MAX_R - DOT_R) * tt;
+            var a = BASE_ALPHA + (MAX_ALPHA - BASE_ALPHA) * tt;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(17,17,16,'+a+')';
+            ctx.fill();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    if(reduceMotion){
+      ctx.drawImage(baseCanvas, 0, 0, W, H);
+    } else {
+      requestAnimationFrame(draw);
+    }
+  })();
+</script>
+
+</body>
+</html>
