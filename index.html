@@ -200,8 +200,8 @@
   .plate{background:var(--paper); display:grid; grid-template-columns:1fr 1fr; scroll-margin-top:76px;}
   .plate.alt-order .plate-media{order:2;}
   .plate.wide{grid-template-columns:1fr;}
-  .plate-media{overflow:hidden; background:var(--ink); min-height:260px;}
-  .plate-media img{width:100%; height:100%; object-fit:cover; min-height:260px;}
+  .plate-media{overflow:hidden; background:var(--ink); min-height:130px;}
+  .plate-media img{width:100%; height:100%; object-fit:cover; min-height:130px;}
   .plate.wide .plate-media img{min-height:0; object-fit:contain; background:#eeece4;}
   .plate-body{padding:44px 48px; display:flex; flex-direction:column; justify-content:center; gap:14px;}
   .plate-tag{font-family:var(--mono); font-size:12px; color:var(--accent);}
@@ -223,13 +223,13 @@
   .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
   .gallery.cols-2{grid-template-columns:1fr 1fr;}
   .gallery figure{margin:0; background:var(--paper); display:flex; flex-direction:column;}
-  .gallery img{width:100%; height:340px; object-fit:cover; display:block;}
+  .gallery img{width:100%; height:170px; object-fit:cover; display:block;}
   .gallery figcaption{font-family:var(--mono); font-size:11.5px; color:var(--ink-soft); padding:12px 16px; border-top:1px solid var(--line);}
 
   @media(max-width:760px){
     .plate, .plate.alt-order, .plate.text-only{grid-template-columns:1fr;}
     .gallery, .gallery.cols-2{grid-template-columns:1fr;}
-    .gallery img{height:220px;}
+    .gallery img{height:110px;}
     .plate.alt-order .plate-media{order:0;}
     .plate-body{padding:32px 24px;}
   }
@@ -254,7 +254,7 @@
   }
   .project-card.active{border-color:var(--accent);}
   .project-card:hover .project-card-tag, .project-card.active .project-card-tag{color:var(--paper); opacity:0.7;}
-  .project-card-thumb{display:block; height:150px; overflow:hidden; background:var(--ink);}
+  .project-card-thumb{display:block; height:75px; overflow:hidden; background:var(--ink);}
   .project-card-thumb img{
     width:100%; height:100%; object-fit:cover; display:block;
     filter:grayscale(0.85) contrast(1.05);
@@ -401,9 +401,9 @@
   <section class="hero" id="inicio">
     <span class="hero-tag">paloma.mx</span>
     <div class="hero-inner">
-      <p class="hero-kicker"><span class="dot"></span>Querétaro, México — disponible para reubicación</p>
+      <p class="hero-kicker"><span class="dot"></span>Querétaro, México, disponible para reubicación</p>
       <h1 class="hero-title">Diseño que <em>funciona.</em><br>Proyectos que avanzan.</h1>
-      <p class="hero-lead">Soy diseñadora industrial y project manager. Casi 4 años entre estudios de diseño, manufactura y operaciones de cuentas internacionales — hoy en SGS &amp; Co, antes en Pottery Barn · Williams-Sonoma.</p>
+      <p class="hero-lead">Soy diseñadora industrial y project manager. Llevo casi 4 años entre estudios de diseño, manufactura y operaciones de cuentas internacionales: hoy en SGS &amp; Co, antes en Pottery Barn · Williams-Sonoma.</p>
       <div class="cta-row">
         <div class="dropdown-wrap">
           <button type="button" class="btn primary" id="verProyectosBtn" aria-haspopup="true" aria-expanded="false">ver proyectos</button>
@@ -498,7 +498,7 @@
       <div class="whatido-head reveal">
         <p class="section-label">qué hago (y disfruto haciendo)</p>
         <h2 class="big">Construyo sistemas<br>que se sostienen solos.</h2>
-        <p>Diseño piezas, espacios y marcas — y también los proyectos y equipos que los hacen posibles. Me interesa lo que conecta lo creativo con lo operativo: prototipos, dashboards, procesos y presentaciones que de verdad se usan.</p>
+        <p>Diseño piezas, espacios y marcas, y también los proyectos y equipos que los hacen posibles. Me interesa lo que conecta lo creativo con lo operativo: prototipos, dashboards, procesos y presentaciones que de verdad se usan.</p>
       </div>
       <div class="pill-cloud reveal">
         <span class="pill">Diseño industrial</span>
@@ -526,7 +526,7 @@
       </div>
       <div class="project-grid reveal">
         <a href="#proyecto-mabe" class="project-card" aria-expanded="false">
-          <span class="project-card-thumb"><img src="assets/projects/mabe-render-cocina.webp" alt="" loading="lazy"></span>
+          <span class="project-card-thumb"><img src="assets/projects/mabe-thumb.jpg" alt="" loading="lazy"></span>
           <span class="project-card-body">
             <span class="project-card-tag">diseño industrial</span>
             <span class="project-card-name">Mabe — Rediseño de estufa</span>
@@ -583,8 +583,8 @@
               <div class="plate-body">
                 <span class="plate-tag">diseño industrial · Mabe</span>
                 <h3>Mabe — Rediseño de estufa</h3>
-                <p>Durante seis meses, un equipo de la universidad y yo trabajamos junto a Mabe para repensar una estufa doméstica desde cero. Organizamos el trabajo en sprints con SCRUM y usamos el proceso de diseño de Bruno Munari para no perder de vista el problema real detrás de cada decisión: probamos, descartamos y regresamos a la mesa de dibujo más veces de las que puedo contar antes de llegar a una propuesta final.</p>
-                <p>Todo ese ir y venir terminó en el prototipo a escala 1:1 de la foto — construido a mano, pieza por pieza, junto al equipo de ingeniería de Mabe.</p>
+                <p>Durante seis meses, mi equipo de la universidad y yo trabajamos junto a Mabe para repensar una estufa doméstica desde cero. Organizamos el trabajo en sprints con SCRUM y usamos el proceso de diseño de Bruno Munari para no perder de vista el problema real detrás de cada decisión: probamos, descartamos y regresamos a la mesa de dibujo más veces de las que puedo contar antes de llegar a una propuesta final.</p>
+                <p>Todo ese ir y venir terminó en el prototipo a escala 1:1 de la foto, construido a mano, pieza por pieza, junto al equipo de ingeniería de Mabe.</p>
               </div>
             </div>
 
@@ -595,14 +595,14 @@
               <div class="plate-body">
                 <span class="plate-tag">proceso</span>
                 <h3>Del papel a la pieza</h3>
-                <p>Cada mejora en esta lámina — las parrillas modulares, el display con barras de progreso, las bisagras ocultas que convierten el copete en repisa, el cajón para colgar sartenes calientes — salió de hacer las mismas cuatro preguntas una y otra vez: ¿cómo? ¿cuándo? ¿dónde? ¿por qué? Dibujar a mano seguía siendo la forma más rápida de probar una idea antes de llevarla a un modelo 3D o descartarla por completo.</p>
+                <p>En esta lámina reuní cada mejora que fuimos encontrando en el camino: parrillas modulares, un display con barras de progreso, bisagras ocultas que convierten el copete en repisa y un cajón para colgar sartenes calientes. Cada una salió de hacerme las mismas cuatro preguntas una y otra vez: ¿cómo? ¿cuándo? ¿dónde? ¿por qué? Dibujar a mano seguía siendo la forma más rápida de probar una idea antes de llevarla a un modelo 3D o de descartarla por completo.</p>
               </div>
             </div>
 
             <div class="gallery cols-2">
               <figure>
                 <img src="assets/projects/mabe-render-detalle.webp" alt="Render de detalle del quemador y los controles de la estufa Mabe">
-                <figcaption>vista de detalle — quemadores y controles</figcaption>
+                <figcaption>detalle de quemadores y controles</figcaption>
               </figure>
               <figure>
                 <img src="assets/projects/mabe-render-completo.webp" alt="Render general del modelo 3D final de la estufa Mabe">
@@ -617,7 +617,7 @@
               <div class="plate-body">
                 <span class="plate-tag">aprendizaje</span>
                 <h3>Diseñar con y para el usuario</h3>
-                <p>Trabajar codo a codo con ingenieros y diseñadores de Mabe — gente con años de experiencia en manufactura — me enseñó a defender una idea con datos, a ceder cuando la ingeniería lo pedía, y a entender que la innovación cotidiana (un gancho, una bisagra, un cajón que sí cierra bien) importa tanto como el rediseño completo.</p>
+                <p>Trabajar codo a codo con ingenieros y diseñadores de Mabe, con años de experiencia en manufactura, me enseñó a defender una idea con datos, a ceder cuando la ingeniería lo pedía y a entender que la innovación cotidiana (un gancho, una bisagra, un cajón que sí cierra bien) importa tanto como el rediseño completo.</p>
                 <p>Fue mi primer proyecto real de trabajo en equipo multidisciplinario bajo presión de tiempo real, y es, en buena parte, la base de cómo hoy combino diseño y gestión de proyectos: escuchar primero, prototipar rápido, y no soltar la pregunta de "¿esto de verdad resuelve algo para quien lo va a usar?".</p>
               </div>
             </div>
@@ -635,7 +635,7 @@
                 <span class="plate-tag">diseño industrial · exhibición</span>
                 <h3>Prepec — Stand corporativo</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
@@ -652,7 +652,7 @@
                 <span class="plate-tag">diseño industrial · ingeniería</span>
                 <h3>General Electric — Spacer</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
@@ -669,7 +669,7 @@
                 <span class="plate-tag">arquitectura de interiores</span>
                 <h3>Vallaheim — Texas, USA</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
@@ -686,7 +686,7 @@
                 <span class="plate-tag">ux / ui</span>
                 <h3>Agoda &amp; Wasabi — Usabilidad</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
@@ -703,7 +703,7 @@
                 <span class="plate-tag">arquitectura de interiores</span>
                 <h3>Pottery Barn — Manual IA</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
@@ -720,7 +720,7 @@
                 <span class="plate-tag">identidad de marca</span>
                 <h3>Paloma.mx &amp; Rumberos</h3>
                 <p>Caso de estudio completo en preparación.</p>
-                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+                <span class="plate-status"><span class="dot"></span>por ahora sigue en construcción, escríbeme si quieres ver el proceso completo</span>
               </div>
             </div>
           </div>
