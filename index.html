@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.add('js');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ana Paloma Jácome — Diseño industrial &amp; gestión de proyectos</title>
 <meta name="description" content="Portafolio de Ana Paloma Jácome, diseñadora industrial y project manager en Querétaro, México. Diseño de producto, arquitectura de interiores, UX/UI y gestión de proyectos internacionales.">
@@ -235,23 +236,32 @@
 
   /* ---------- Floating project cards ---------- */
   .project-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; align-items:start;
     margin-bottom:56px;
   }
   .project-card{
     display:block; text-decoration:none; color:var(--ink);
     background:var(--paper); border:1px solid var(--ink);
-    padding:26px 22px; cursor:pointer;
+    overflow:hidden; cursor:pointer;
     animation:floatCard 5s ease-in-out infinite;
-    transition:background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+    transition:background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     will-change:transform;
   }
-  .project-card:hover{
+  .project-card:hover, .project-card.active{
     background:var(--ink); color:var(--paper);
     transform:translateY(-6px);
     box-shadow:0 14px 24px -12px rgba(0,0,0,0.28);
   }
-  .project-card:hover .project-card-tag{color:var(--paper); opacity:0.7;}
+  .project-card.active{border-color:var(--accent);}
+  .project-card:hover .project-card-tag, .project-card.active .project-card-tag{color:var(--paper); opacity:0.7;}
+  .project-card-thumb{display:block; height:150px; overflow:hidden; background:var(--ink);}
+  .project-card-thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(0.85) contrast(1.05);
+    transition:filter .35s ease, transform .45s ease;
+  }
+  .project-card:hover .project-card-thumb img{filter:grayscale(0); transform:scale(1.05);}
+  .project-card-body{display:block; padding:26px 22px;}
   .project-card-tag{
     display:block; font-family:var(--mono); font-size:11.5px; color:var(--accent);
     margin-bottom:10px;
@@ -274,6 +284,29 @@
   @media(max-width:760px){
     .project-grid{grid-template-columns:1fr 1fr; gap:12px;}
   }
+
+  /* ---------- Case studies (expand-in-place) ---------- */
+  .case{scroll-margin-top:76px;}
+  .js .case{
+    display:grid; grid-template-rows:0fr; overflow:hidden;
+    transition:grid-template-rows .55s cubic-bezier(.25,.8,.35,1);
+  }
+  .js .case.open{grid-template-rows:1fr;}
+  .case-inner{
+    min-height:0; min-width:0; position:relative;
+    display:flex; flex-direction:column; gap:1px; background:var(--line);
+  }
+  .js .case-inner{opacity:0; transition:opacity .3s ease;}
+  .js .case.open .case-inner{opacity:1; transition:opacity .3s ease .15s;}
+  .case-close{
+    display:none; position:absolute; top:16px; right:16px; z-index:5;
+    width:34px; height:34px; align-items:center; justify-content:center;
+    background:var(--paper); border:1px solid var(--ink); color:var(--ink);
+    font-family:var(--mono); font-size:14px; line-height:1; cursor:pointer; padding:0;
+    transition:background .15s ease, color .15s ease;
+  }
+  .js .case-close{display:flex;}
+  .case-close:hover{background:var(--ink); color:var(--paper);}
   @media(max-width:480px){
     .project-grid{grid-template-columns:1fr;}
   }
@@ -492,153 +525,204 @@
         <p class="section-meta">Selecciona un proyecto para ver el caso completo.</p>
       </div>
       <div class="project-grid reveal">
-        <a href="#proyecto-mabe" class="project-card">
-          <span class="project-card-tag">diseño industrial</span>
-          <span class="project-card-name">Mabe — Rediseño de estufa</span>
+        <a href="#proyecto-mabe" class="project-card" aria-expanded="false">
+          <span class="project-card-thumb"><img src="assets/projects/mabe-equipo.webp" alt="" loading="lazy"></span>
+          <span class="project-card-body">
+            <span class="project-card-tag">diseño industrial</span>
+            <span class="project-card-name">Mabe — Rediseño de estufa</span>
+          </span>
         </a>
-        <a href="#proyecto-prepec" class="project-card">
-          <span class="project-card-tag">diseño industrial · exhibición</span>
-          <span class="project-card-name">Prepec — Stand corporativo</span>
+        <a href="#proyecto-prepec" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">diseño industrial · exhibición</span>
+            <span class="project-card-name">Prepec — Stand corporativo</span>
+          </span>
         </a>
-        <a href="#proyecto-ge" class="project-card">
-          <span class="project-card-tag">diseño industrial · ingeniería</span>
-          <span class="project-card-name">General Electric — Spacer</span>
+        <a href="#proyecto-ge" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">diseño industrial · ingeniería</span>
+            <span class="project-card-name">General Electric — Spacer</span>
+          </span>
         </a>
-        <a href="#proyecto-vallaheim" class="project-card">
-          <span class="project-card-tag">arquitectura de interiores</span>
-          <span class="project-card-name">Vallaheim — Texas, USA</span>
+        <a href="#proyecto-vallaheim" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">arquitectura de interiores</span>
+            <span class="project-card-name">Vallaheim — Texas, USA</span>
+          </span>
         </a>
-        <a href="#proyecto-wasabi" class="project-card">
-          <span class="project-card-tag">ux / ui</span>
-          <span class="project-card-name">Agoda &amp; Wasabi — Usabilidad</span>
+        <a href="#proyecto-wasabi" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">ux / ui</span>
+            <span class="project-card-name">Agoda &amp; Wasabi — Usabilidad</span>
+          </span>
         </a>
-        <a href="#proyecto-potterybarn" class="project-card">
-          <span class="project-card-tag">arquitectura de interiores</span>
-          <span class="project-card-name">Pottery Barn — Manual IA</span>
+        <a href="#proyecto-potterybarn" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">arquitectura de interiores</span>
+            <span class="project-card-name">Pottery Barn — Manual IA</span>
+          </span>
         </a>
-        <a href="#proyecto-palomamx" class="project-card">
-          <span class="project-card-tag">identidad de marca</span>
-          <span class="project-card-name">Paloma.mx &amp; Rumberos</span>
+        <a href="#proyecto-palomamx" class="project-card" aria-expanded="false">
+          <span class="project-card-body">
+            <span class="project-card-tag">identidad de marca</span>
+            <span class="project-card-name">Paloma.mx &amp; Rumberos</span>
+          </span>
         </a>
       </div>
 
       <div class="plates" id="plates-projects">
 
-        <div class="plate" id="proyecto-mabe">
-          <div class="plate-media">
-            <img src="assets/projects/mabe-equipo.webp" alt="Ana Paloma y una compañera de equipo posando junto al prototipo de estufa Mabe a escala 1:1, dentro de la planta de manufactura">
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">diseño industrial · Mabe</span>
-            <h3>Mabe — Rediseño de estufa</h3>
-            <p>Durante seis meses, un equipo de la universidad y yo trabajamos junto a Mabe para repensar una estufa doméstica desde cero. Organizamos el trabajo en sprints con SCRUM y usamos el proceso de diseño de Bruno Munari para no perder de vista el problema real detrás de cada decisión: probamos, descartamos y regresamos a la mesa de dibujo más veces de las que puedo contar antes de llegar a una propuesta final.</p>
-            <p>Todo ese ir y venir terminó en el prototipo a escala 1:1 de la foto — construido a mano, pieza por pieza, junto al equipo de ingeniería de Mabe.</p>
+        <div class="case" id="proyecto-mabe">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+
+            <div class="plate">
+              <div class="plate-media">
+                <img src="assets/projects/mabe-equipo.webp" alt="Ana Paloma y una compañera de equipo posando junto al prototipo de estufa Mabe a escala 1:1, dentro de la planta de manufactura">
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">diseño industrial · Mabe</span>
+                <h3>Mabe — Rediseño de estufa</h3>
+                <p>Durante seis meses, un equipo de la universidad y yo trabajamos junto a Mabe para repensar una estufa doméstica desde cero. Organizamos el trabajo en sprints con SCRUM y usamos el proceso de diseño de Bruno Munari para no perder de vista el problema real detrás de cada decisión: probamos, descartamos y regresamos a la mesa de dibujo más veces de las que puedo contar antes de llegar a una propuesta final.</p>
+                <p>Todo ese ir y venir terminó en el prototipo a escala 1:1 de la foto — construido a mano, pieza por pieza, junto al equipo de ingeniería de Mabe.</p>
+              </div>
+            </div>
+
+            <div class="plate wide">
+              <div class="plate-media">
+                <img src="assets/projects/mabe-bocetos.webp" alt="Lámina de bocetos del proceso: parrillas modulares, display con barras de progreso, bisagras ocultas para el copete y un cajón para colgar sartenes calientes">
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">proceso</span>
+                <h3>Del papel a la pieza</h3>
+                <p>Cada mejora en esta lámina — las parrillas modulares, el display con barras de progreso, las bisagras ocultas que convierten el copete en repisa, el cajón para colgar sartenes calientes — salió de hacer las mismas cuatro preguntas una y otra vez: ¿cómo? ¿cuándo? ¿dónde? ¿por qué? Dibujar a mano seguía siendo la forma más rápida de probar una idea antes de llevarla a un modelo 3D o descartarla por completo.</p>
+              </div>
+            </div>
+
+            <div class="gallery cols-2">
+              <figure>
+                <img src="assets/projects/mabe-render-detalle.webp" alt="Render de detalle del quemador y los controles de la estufa Mabe">
+                <figcaption>vista de detalle — quemadores y controles</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/mabe-render-completo.webp" alt="Render general del modelo 3D final de la estufa Mabe">
+                <figcaption>vista general del modelo 3D final</figcaption>
+              </figure>
+            </div>
+
+            <div class="plate alt-order">
+              <div class="plate-media">
+                <img src="assets/projects/mabe-render-cocina.webp" alt="Render de una cocina con el usuario abriendo el cajón inferior de la estufa, donde quedan colgados dos sartenes">
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">aprendizaje</span>
+                <h3>Diseñar con y para el usuario</h3>
+                <p>Trabajar codo a codo con ingenieros y diseñadores de Mabe — gente con años de experiencia en manufactura — me enseñó a defender una idea con datos, a ceder cuando la ingeniería lo pedía, y a entender que la innovación cotidiana (un gancho, una bisagra, un cajón que sí cierra bien) importa tanto como el rediseño completo.</p>
+                <p>Fue mi primer proyecto real de trabajo en equipo multidisciplinario bajo presión de tiempo real, y es, en buena parte, la base de cómo hoy combino diseño y gestión de proyectos: escuchar primero, prototipar rápido, y no soltar la pregunta de "¿esto de verdad resuelve algo para quien lo va a usar?".</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="plate wide">
-          <div class="plate-media">
-            <img src="assets/projects/mabe-bocetos.webp" alt="Lámina de bocetos del proceso: parrillas modulares, display con barras de progreso, bisagras ocultas para el copete y un cajón para colgar sartenes calientes">
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">proceso</span>
-            <h3>Del papel a la pieza</h3>
-            <p>Cada mejora en esta lámina — las parrillas modulares, el display con barras de progreso, las bisagras ocultas que convierten el copete en repisa, el cajón para colgar sartenes calientes — salió de hacer las mismas cuatro preguntas una y otra vez: ¿cómo? ¿cuándo? ¿dónde? ¿por qué? Dibujar a mano seguía siendo la forma más rápida de probar una idea antes de llevarla a un modelo 3D o descartarla por completo.</p>
-          </div>
-        </div>
-
-        <div class="gallery cols-2">
-          <figure>
-            <img src="assets/projects/mabe-render-detalle.webp" alt="Render de detalle del quemador y los controles de la estufa Mabe">
-            <figcaption>vista de detalle — quemadores y controles</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/projects/mabe-render-completo.webp" alt="Render general del modelo 3D final de la estufa Mabe">
-            <figcaption>vista general del modelo 3D final</figcaption>
-          </figure>
-        </div>
-
-        <div class="plate alt-order">
-          <div class="plate-media">
-            <img src="assets/projects/mabe-render-cocina.webp" alt="Render de una cocina con el usuario abriendo el cajón inferior de la estufa, donde quedan colgados dos sartenes">
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">aprendizaje</span>
-            <h3>Diseñar con y para el usuario</h3>
-            <p>Trabajar codo a codo con ingenieros y diseñadores de Mabe — gente con años de experiencia en manufactura — me enseñó a defender una idea con datos, a ceder cuando la ingeniería lo pedía, y a entender que la innovación cotidiana (un gancho, una bisagra, un cajón que sí cierra bien) importa tanto como el rediseño completo.</p>
-            <p>Fue mi primer proyecto real de trabajo en equipo multidisciplinario bajo presión de tiempo real, y es, en buena parte, la base de cómo hoy combino diseño y gestión de proyectos: escuchar primero, prototipar rápido, y no soltar la pregunta de "¿esto de verdad resuelve algo para quien lo va a usar?".</p>
+        <div class="case" id="proyecto-prepec">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">diseño industrial · exhibición</span>
+                <h3>Prepec — Stand corporativo</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="plate text-only" id="proyecto-prepec">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg>
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">diseño industrial · exhibición</span>
-            <h3>Prepec — Stand corporativo</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
-          </div>
-        </div>
-
-        <div class="plate text-only" id="proyecto-ge">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.2 7.8l2.1 1.7M17.7 14.5l2.1 1.7M4.2 16.2l2.1-1.7M17.7 9.5l2.1-1.7"/></svg>
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">diseño industrial · ingeniería</span>
-            <h3>General Electric — Spacer</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+        <div class="case" id="proyecto-ge">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.2 7.8l2.1 1.7M17.7 14.5l2.1 1.7M4.2 16.2l2.1-1.7M17.7 9.5l2.1-1.7"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">diseño industrial · ingeniería</span>
+                <h3>General Electric — Spacer</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="plate text-only" id="proyecto-vallaheim">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">arquitectura de interiores</span>
-            <h3>Vallaheim — Texas, USA</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
-          </div>
-        </div>
-
-        <div class="plate text-only" id="proyecto-wasabi">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 8h18"/><circle cx="6" cy="6" r="0.6" fill="var(--paper)"/></svg>
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">ux / ui</span>
-            <h3>Agoda &amp; Wasabi — Usabilidad</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+        <div class="case" id="proyecto-vallaheim">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">arquitectura de interiores</span>
+                <h3>Vallaheim — Texas, USA</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="plate text-only" id="proyecto-potterybarn">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-          </div>
-          <div class="plate-body">
-            <span class="plate-tag">arquitectura de interiores</span>
-            <h3>Pottery Barn — Manual IA</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+        <div class="case" id="proyecto-wasabi">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 8h18"/><circle cx="6" cy="6" r="0.6" fill="var(--paper)"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">ux / ui</span>
+                <h3>Agoda &amp; Wasabi — Usabilidad</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="plate text-only" id="proyecto-palomamx">
-          <div class="plate-glyph" aria-hidden="true">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+        <div class="case" id="proyecto-potterybarn">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">arquitectura de interiores</span>
+                <h3>Pottery Barn — Manual IA</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
-          <div class="plate-body">
-            <span class="plate-tag">identidad de marca</span>
-            <h3>Paloma.mx &amp; Rumberos</h3>
-            <p>Caso de estudio completo en preparación.</p>
-            <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+        </div>
+
+        <div class="case" id="proyecto-palomamx">
+          <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Cerrar caso de estudio">✕</button>
+            <div class="plate text-only">
+              <div class="plate-glyph" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--paper)" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+              </div>
+              <div class="plate-body">
+                <span class="plate-tag">identidad de marca</span>
+                <h3>Paloma.mx &amp; Rumberos</h3>
+                <p>Caso de estudio completo en preparación.</p>
+                <span class="plate-status"><span class="dot"></span>próximamente — escríbeme si quieres ver el proceso completo</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -737,6 +821,82 @@
     });
     menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  })();
+
+  // Project case studies — expand in place
+  (function(){
+    var cases = {};
+    document.querySelectorAll('.case').forEach(function(c){ cases[c.id] = c; });
+    if(!Object.keys(cases).length) return;
+
+    function setTriggers(id, isOpen){
+      document.querySelectorAll('a[href="#' + id + '"]').forEach(function(a){
+        a.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        a.classList.toggle('active', isOpen);
+      });
+    }
+    function closeCase(id){
+      var c = cases[id];
+      if(!c) return;
+      c.classList.remove('open');
+      setTriggers(id, false);
+    }
+    function openCase(id, scroll){
+      var target = cases[id];
+      if(!target) return;
+      var previouslyOpen = null;
+      Object.keys(cases).forEach(function(cid){
+        if(cid !== id && cases[cid].classList.contains('open')){
+          previouslyOpen = cases[cid];
+          closeCase(cid);
+        }
+      });
+      target.classList.add('open');
+      setTriggers(id, true);
+      if(history.replaceState) history.replaceState(null, '', '#' + id);
+      if(scroll){
+        var doScroll = function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); };
+        if(previouslyOpen){
+          // wait for the other case's collapse animation to finish so we don't
+          // scroll to a position that shifts once it fully closes
+          var done = false;
+          var finish = function(e){
+            if(done) return;
+            if(e && e.target !== previouslyOpen) return; // ignore bubbled child transitions
+            done = true;
+            previouslyOpen.removeEventListener('transitionend', finish);
+            doScroll();
+          };
+          previouslyOpen.addEventListener('transitionend', finish);
+          setTimeout(finish, 650);
+        } else {
+          setTimeout(doScroll, 60);
+        }
+      }
+    }
+    function toggleCase(id){
+      var target = cases[id];
+      if(!target) return;
+      if(target.classList.contains('open')) closeCase(id);
+      else openCase(id, true);
+    }
+
+    document.addEventListener('click', function(e){
+      var closeBtn = e.target.closest('.case-close');
+      if(closeBtn){
+        var caseEl = closeBtn.closest('.case');
+        if(caseEl) closeCase(caseEl.id);
+        return;
+      }
+      var a = e.target.closest('a[href^="#proyecto-"]');
+      if(a && cases[a.getAttribute('href').slice(1)]){
+        e.preventDefault();
+        toggleCase(a.getAttribute('href').slice(1));
+      }
+    });
+
+    var initial = location.hash.slice(1);
+    if(initial && cases[initial]) openCase(initial, true);
   })();
 
   // Sheet indicator scroll-spy
